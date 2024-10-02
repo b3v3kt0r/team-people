@@ -1,6 +1,6 @@
 from rest_framework import generics
 
-from people.serializers import UserSerializer
+from user.serializers import UserSerializer
 
 
 class CreateUserView(generics.CreateAPIView):
