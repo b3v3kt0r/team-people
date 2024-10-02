@@ -52,6 +52,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+AUTH_USER_MODEL = "people.Person"
+
 ROOT_URLCONF = "teams_people.urls"
 
 TEMPLATES = [

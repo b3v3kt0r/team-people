@@ -1,3 +1,8 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# Create your models here.
+from teams.models import Team
+
+
+class Person(AbstractUser):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
