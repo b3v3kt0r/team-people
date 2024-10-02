@@ -1,10 +1,11 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAdminUser
 
 from user.serializers import UserSerializer
 
 
 class CreateUserView(generics.CreateAPIView):
-    permission_classes = []
+    permission_classes = [IsAdminUser]
     serializer_class = UserSerializer
 
 
