@@ -44,7 +44,7 @@ class User(AbstractUser):
 
     username = None
     email = models.EmailField(_("email address"), unique=True)
-    team = models.ForeignKey(Team, related_name="users", on_delete=models.CASCADE, default="no team")
+    team = models.ForeignKey(Team, related_name="users", on_delete=models.CASCADE, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
