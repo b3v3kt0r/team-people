@@ -19,3 +19,9 @@ class TaskViewSet(viewsets.ModelViewSet):
             return TaskListSerializer
         else:
             return TaskSerializer
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.action in ["list", "retrieve"]:
+            return self.queryset.select_related()
+        return queryset
