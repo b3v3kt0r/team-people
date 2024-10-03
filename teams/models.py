@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     date_of_establishment = models.DateField()
 
     def __str__(self):
