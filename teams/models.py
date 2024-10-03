@@ -12,8 +12,8 @@ class Team(models.Model):
 
 class Task(models.Model):
     title = models.CharField(max_length=100)
-    assigned_to = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="tasks")
-    teams = models.ManyToManyField(Team, related_name="tasks")
+    assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tasks")
+    teams = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="tasks")
     completed = models.BooleanField(default=False)
 
     def __str__(self):
