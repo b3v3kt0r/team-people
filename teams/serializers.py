@@ -5,9 +5,24 @@ from user.serializers import UserSerializer
 
 
 class TeamSerializer(serializers.ModelSerializer):
+    tasks = serializers.IntegerField(read_only=True, source="tasks.count")
+    people = serializers.IntegerField(read_only=True, source="users.count")
+
     class Meta:
         model = Team
-        fields = ["id", "name", "date_of_establishment"]
+        fields = ["id", "name", "date_of_establishment", "tasks", "people"]
+
+
+class TeamRetrieveSerializer(TeamSerializer):
+    tasks = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field="title",
+    )
+    people = serializers.SerializerMethodField()
+
+    def get_people(self, team: Team):
+        return [f"{user.first_name} {user.last_name}" for user in team.users.all()]
 
 
 class TaskSerializer(serializers.ModelSerializer):

@@ -6,7 +6,7 @@ from teams.models import Team, Task
 from teams.serializers import (
     TeamSerializer,
     TaskSerializer,
-    TaskListSerializer
+    TaskListSerializer, TeamRetrieveSerializer
 )
 
 
@@ -15,6 +15,11 @@ class TeamViewSet(viewsets.ModelViewSet):
     serializer_class = TeamSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = TeamFilter
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return TeamRetrieveSerializer
+        return TeamSerializer
 
 
 class TaskViewSet(viewsets.ModelViewSet):
