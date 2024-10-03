@@ -15,6 +15,14 @@ class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
 
 
+class UserDetailView(generics.RetrieveUpdateAPIView):
+    permission_classes = [IsAdminUser]
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        return User.objects.all()
+
+
 class ManageUserView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
 
