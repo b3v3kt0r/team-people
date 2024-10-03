@@ -1,13 +1,20 @@
-from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
+from teams.filters import TeamFilter
 from teams.models import Team, Task
-from teams.serializers import TeamSerializer, TaskSerializer, TaskListSerializer
+from teams.serializers import (
+    TeamSerializer,
+    TaskSerializer,
+    TaskListSerializer
+)
 
 
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = TeamFilter
 
 
 class TaskViewSet(viewsets.ModelViewSet):
