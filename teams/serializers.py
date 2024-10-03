@@ -22,7 +22,8 @@ class TeamRetrieveSerializer(TeamSerializer):
     people = serializers.SerializerMethodField()
 
     def get_people(self, team: Team):
-        return [f"{user.first_name} {user.last_name}" for user in team.users.all()]
+        return [f"{user.first_name} {user.last_name}"
+                for user in team.users.all()]
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -44,5 +45,6 @@ class TaskListSerializer(TaskSerializer):
 
     def get_assigned_to(self, task: Task):
         if task.assigned_to:
-            return f"{task.assigned_to.first_name} {task.assigned_to.last_name}"
+            return (f"{task.assigned_to.first_name} "
+                    f"{task.assigned_to.last_name}")
         return None
